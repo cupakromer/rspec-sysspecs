@@ -28,8 +28,34 @@ RSpec.configure do |config|
   config.when_first_matching_example_defined(type: :system) do
     require 'capybara'
     require 'selenium/webdriver'
-    config.before(type: :system) do
-      driven_by :selenium_chrome
+    require 'billy/capybara/rspec'
+
+    # @see https://github.com/oesmith/puffing-billy/blob/v0.12.0/lib/billy/browsers/capybara.rb#L57-L65 `selenium_chrome_billy` registration
+    ::Capybara.register_driver :custom_selenium_chrome_billy do |app|
+      options = Selenium::WebDriver::Chrome::Options.new
+      options.add_argument("--proxy-server=#{Billy.proxy.host}:#{Billy.proxy.port}")
+
+      # When using puffing-billy custom cache scopes to record variations of
+      # the same URL it's possible to get random spec failures due to Chrome's
+      # internal cache; which may serve a previous cached version instead.
+      #
+      # I'm unaware of a way to use a hook to tell the driver to tell chrome to
+      # clear the cache. I tried other cache options like `--disable-cache` and
+      # `--incognito` but they did not work. The only way I found to prevent
+      # the issue is by disabling cache through the disk cache size.
+      #
+      # Setting the value to 0 does not work either.
+      options.add_argument '--disk-cache-size=1'
+
+      ::Capybara::Selenium::Driver.new(
+        app, browser: :chrome,
+        options: options
+      )
+    end
+
+    # Use `prepend_before` to allow specs to override this in `before` hooks
+    config.prepend_before(type: :system) do
+      driven_by :selenium_chrome_billy
     end
   end
 

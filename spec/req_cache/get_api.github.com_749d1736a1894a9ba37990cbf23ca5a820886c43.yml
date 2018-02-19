@@ -1,0 +1,33 @@
+---
+:scope:
+:url: https://api.github.com/?
+:body: ''
+:status: 200
+:method: get
+:headers:
+  Server: GitHub.com
+  Date: Mon, 19 Feb 2018 18:57:28 GMT
+  Content-Type: application/javascript; charset=utf-8
+  Transfer-Encoding: chunked
+  Connection: close
+  Status: 200 OK
+  X-RateLimit-Limit: '60'
+  X-RateLimit-Remaining: '41'
+  X-RateLimit-Reset: '1519069219'
+  Cache-Control: public, max-age=60, s-maxage=60
+  Vary: Accept
+  ETag: W/"7dc470913f1fe9bb6c7355b50a0737bc"
+  Access-Control-Expose-Headers: ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit,
+    X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes,
+    X-Poll-Interval
+  Access-Control-Allow-Origin: "*"
+  Content-Security-Policy: default-src 'none'
+  Strict-Transport-Security: max-age=31536000; includeSubdomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: deny
+  X-XSS-Protection: 1; mode=block
+  X-Runtime-rack: '0.010350'
+  Content-Encoding: gzip
+  X-GitHub-Request-Id: ECEA:C2F6:3447B5F:58E0399:5A8B1E18
+:content: |
+  /**/jQuery11240745517517224163_1519066644978("Captured Github API")

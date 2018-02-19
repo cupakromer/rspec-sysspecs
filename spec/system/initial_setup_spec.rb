@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "System specs", type: :system do
 
+  # These specs demonstrate the basic system test setup / behavior. We use the
+  # base driver here to avoid issues with the puffing-billy proxy
+  before do
+    driven_by :selenium_chrome
+  end
+
   specify "are setup and working" do
     Book.create! title: "Any Book Title"
     Book.create! title: "Another Book Title"

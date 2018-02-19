@@ -1,0 +1,21 @@
+---
+:scope: more_caches
+:url: https://www.example.com/
+:body: ''
+:status: 200
+:method: get
+:headers:
+  Content-Encoding: gzip
+  Accept-Ranges: bytes
+  Cache-Control: max-age=604800
+  Content-Type: text/html
+  Date: Mon, 19 Feb 2018 19:50:40 GMT
+  Etag: '"1541025663+ident"'
+  Expires: Mon, 26 Feb 2018 19:50:40 GMT
+  Last-Modified: Fri, 09 Aug 2013 23:54:35 GMT
+  Server: ECS (dca/246E)
+  Vary: Accept-Encoding
+  X-Cache: HIT
+  Content-Length: '606'
+  Connection: close
+:content: "Separate SSL HTTPS cache"
