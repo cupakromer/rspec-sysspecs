@@ -38,6 +38,10 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'rspec-rails'
+
+  # System tests
+  gem 'capybara', '~> 2.13', require: false
+  gem 'selenium-webdriver', require: false
 end
 
 group :development do
