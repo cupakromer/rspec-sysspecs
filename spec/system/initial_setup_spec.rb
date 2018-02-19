@@ -15,4 +15,21 @@ RSpec.describe "System specs", type: :system do
     )
   end
 
+  specify "support JSONP requests", :online do
+    visit books_url
+    expect(find("#github")).to have_content("gists_url")
+  end
+
+  specify "allows server side network requests", :online do
+    visit books_url
+    expect(find("#serverjs")).to be
+    click_button "All Books"
+    expect(find("#serverjs")).to have_content(
+      "Example Domain"
+    ).and have_content(
+      "This domain is established to be used for illustrative examples" \
+      " in documents."
+    )
+  end
+
 end

@@ -1,3 +1,5 @@
+require 'net/http'
+
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
@@ -5,6 +7,14 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.all
+
+    respond_to do |format|
+      format.html
+
+      format.js do
+        @data = Net::HTTP.get('www.example.com', '/')
+      end
+    end
   end
 
   # GET /books/1
@@ -15,6 +25,14 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = Book.new
+    case params[:redirect]
+    when nil
+      # no-op show new book page
+    when "ssl"
+      redirect_to "https://www.example.com"
+    else
+      redirect_to "http://www.example.com"
+    end
   end
 
   # GET /books/1/edit

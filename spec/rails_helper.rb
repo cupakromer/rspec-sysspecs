@@ -32,4 +32,10 @@ RSpec.configure do |config|
       driven_by :selenium_chrome
     end
   end
+
+  if !system(*%w[ ping -c 10 -o www.github.com ], out: IO::NULL, err: IO::NULL)
+    config.before(:example, :online) do
+      skip "This example requires the network and we are not currently online."
+    end
+  end
 end

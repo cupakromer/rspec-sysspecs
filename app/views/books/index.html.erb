@@ -2,6 +2,16 @@
 
 <h1>Books</h1>
 
+<p>
+  <h2>GitHub JSONP</h2>
+  <pre id="github"></pre>
+</p>
+
+<p>
+  <h2>Server Side JS</h2>
+  <pre id="serverjs"></pre>
+</p>
+
 <table>
   <thead>
     <tr>
@@ -27,3 +37,7 @@
 <br>
 
 <%= link_to 'New Book', new_book_path %>
+<%= link_to 'New Redirect Book', new_book_path(redirect: true) %>
+<%= link_to 'New SSL Book', new_book_path(redirect: :ssl) %>
+
+<%= button_to "All Books", books_path, method: :get, remote: true %>
