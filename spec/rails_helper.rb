@@ -59,6 +59,27 @@ RSpec.configure do |config|
     end
   end
 
+  config.when_first_matching_example_defined(:webmock) do
+    require 'webmock/rspec'
+    WebMock.disable_net_connect!(allow_localhost: true)
+
+    # NOTE: In a real app I likely would not include this. It is necessary here
+    # to ensure the different tests which should not be using WebMock do not
+    # have it enabled. Due to threading issues we need to do this early before
+    # puma launches; which is why we use `prepend_before`.
+    config.prepend_before do |ex|
+      if ex.metadata[:webmock]
+        WebMock.enable!
+        WebMock.disable_net_connect!(allow_localhost: true)
+      else
+        WebMock.disable!
+      end
+    end
+    config.after do |ex|
+      WebMock.disable!
+    end
+  end
+
   if !system(*%w[ ping -c 10 -o www.github.com ], out: IO::NULL, err: IO::NULL)
     config.before(:example, :online) do
       skip "This example requires the network and we are not currently online."
