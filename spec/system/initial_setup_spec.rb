@@ -23,7 +23,11 @@ RSpec.describe "System specs", type: :system do
 
   specify "support JSONP requests", :online do
     visit books_url
-    expect(find("#github")).to have_content("gists_url")
+    expect(find("#github")).to have_content(
+      "gists_url"
+    ).or have_content(
+      "API rate limit exceeded"
+    )
   end
 
   specify "allows server side network requests", :online do
