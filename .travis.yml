@@ -2,7 +2,7 @@ language: ruby
 cache: bundler
 dist: trusty
 addons:
-  chrome: beta
+  chrome: stable
 before_install:
   - bin/chromedriver-install
 script: bin/rspec
