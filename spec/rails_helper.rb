@@ -59,6 +59,7 @@ RSpec.configure do |config|
       options.add_argument '--disk-cache-size=1'
 
       options.add_argument "--proxy-server=#{Billy.proxy.host}:#{Billy.proxy.port}"
+      p options.binary = "/usr/bin/google-chrome-beta" if ENV['CI']
 
       capabilities = ::Selenium::WebDriver::Remote::Capabilities.chrome
       capabilities['acceptInsecureCerts'] = true
