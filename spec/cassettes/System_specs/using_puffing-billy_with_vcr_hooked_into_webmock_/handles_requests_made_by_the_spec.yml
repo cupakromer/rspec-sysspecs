@@ -1,0 +1,111 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://www.example.com/
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Host:
+      - www.example.com
+      Proxy-Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/64.0.3282.167 Safari/537.36
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+      Accept-Language:
+      - en-US,en;q=0.9
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Encoding:
+      - gzip
+      Cache-Control:
+      - max-age=604800
+      Content-Type:
+      - text/html
+      Date:
+      - Tue, 20 Feb 2018 23:05:22 GMT
+      Etag:
+      - '"1541025663+gzip"'
+      Expires:
+      - Tue, 27 Feb 2018 23:05:22 GMT
+      Last-Modified:
+      - Fri, 09 Aug 2013 23:54:35 GMT
+      Server:
+      - ECS (dca/532C)
+      Vary:
+      - Accept-Encoding
+      X-Cache:
+      - HIT
+      Content-Length:
+      - '606'
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: "VCR recorded example.com request"
+    http_version:
+  recorded_at: Tue, 20 Feb 2018 23:05:22 GMT
+- request:
+    method: get
+    uri: https://www.example.com/
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Host:
+      - www.example.com
+      Connection:
+      - keep-alive
+      Upgrade-Insecure-Requests:
+      - '1'
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/64.0.3282.167 Safari/537.36
+      Accept:
+      - text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+      Accept-Language:
+      - en-US,en;q=0.9
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Encoding:
+      - gzip
+      Cache-Control:
+      - max-age=604800
+      Content-Type:
+      - text/html
+      Date:
+      - Tue, 20 Feb 2018 23:05:25 GMT
+      Etag:
+      - '"1541025663+gzip"'
+      Expires:
+      - Tue, 27 Feb 2018 23:05:25 GMT
+      Last-Modified:
+      - Fri, 09 Aug 2013 23:54:35 GMT
+      Server:
+      - ECS (dca/53DB)
+      Vary:
+      - Accept-Encoding
+      X-Cache:
+      - HIT
+      Content-Length:
+      - '606'
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: "VCR recorded SSL example.com request"
+    http_version:
+  recorded_at: Tue, 20 Feb 2018 23:05:25 GMT
+recorded_with: VCR 4.0.0

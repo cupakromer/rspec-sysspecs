@@ -1,0 +1,172 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/?_=<JQUERY__>&callback=<JQUERY_CALLBACK>
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Host:
+      - api.github.com
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/64.0.3282.167 Safari/537.36
+      Accept:
+      - "*/*"
+      Referer:
+      - http://127.0.0.1:63840/books
+      Accept-Language:
+      - en-US,en;q=0.9
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Mon, 26 Feb 2018 22:58:27 GMT
+      Content-Type:
+      - application/javascript; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - close
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '60'
+      X-Ratelimit-Remaining:
+      - '43'
+      X-Ratelimit-Reset:
+      - '1519688248'
+      Cache-Control:
+      - public, max-age=60, s-maxage=60
+      Vary:
+      - Accept
+      Etag:
+      - W/"7dc470913f1fe9bb6c7355b50a0737bc"
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Security-Policy:
+      - default-src 'none'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Runtime-Rack:
+      - '0.010883'
+      Content-Encoding:
+      - gzip
+      X-Github-Request-Id:
+      - F97A:21790:220263:3E3F69:5A949113
+    body:
+      encoding: UTF-8
+      string: |
+        /**/<JQUERY_CALLBACK>({
+          "meta": {
+            "Content-Type": "application/javascript; charset=utf-8",
+            "X-RateLimit-Limit": "60",
+            "X-RateLimit-Remaining": "43",
+            "X-RateLimit-Reset": "1519688248",
+            "Cache-Control": "public, max-age=60, s-maxage=60",
+            "Vary": "Accept",
+            "ETag": "\"7dc470913f1fe9bb6c7355b50a0737bc\"",
+            "X-GitHub-Media-Type": "github.v3; format=json",
+            "status": 200
+          },
+          "data": {
+            "current_user_url": "https://api.github.com/user",
+            "current_user_authorizations_html_url": "https://github.com/settings/connections/applications{/client_id}",
+            "authorizations_url": "https://api.github.com/authorizations",
+            "code_search_url": "https://api.github.com/search/code?q={query}{&page,per_page,sort,order}",
+            "commit_search_url": "https://api.github.com/search/commits?q={query}{&page,per_page,sort,order}",
+            "emails_url": "https://api.github.com/user/emails",
+            "emojis_url": "https://api.github.com/emojis",
+            "events_url": "https://api.github.com/events",
+            "feeds_url": "https://api.github.com/feeds",
+            "followers_url": "https://api.github.com/user/followers",
+            "following_url": "https://api.github.com/user/following{/target}",
+            "gists_url": "https://api.github.com/gists{/gist_id}",
+            "hub_url": "https://api.github.com/hub",
+            "issue_search_url": "https://api.github.com/search/issues?q={query}{&page,per_page,sort,order}",
+            "issues_url": "https://api.github.com/issues",
+            "keys_url": "https://api.github.com/user/keys",
+            "notifications_url": "https://api.github.com/notifications",
+            "organization_repositories_url": "https://api.github.com/orgs/{org}/repos{?type,page,per_page,sort}",
+            "organization_url": "https://api.github.com/orgs/{org}",
+            "public_gists_url": "https://api.github.com/gists/public",
+            "rate_limit_url": "https://api.github.com/rate_limit",
+            "repository_url": "https://api.github.com/repos/{owner}/{repo}",
+            "repository_search_url": "https://api.github.com/search/repositories?q={query}{&page,per_page,sort,order}",
+            "current_user_repositories_url": "https://api.github.com/user/repos{?type,page,per_page,sort}",
+            "starred_url": "https://api.github.com/user/starred{/owner}{/repo}",
+            "starred_gists_url": "https://api.github.com/gists/starred",
+            "team_url": "https://api.github.com/teams",
+            "user_url": "https://api.github.com/users/{user}",
+            "user_organizations_url": "https://api.github.com/user/orgs",
+            "user_repositories_url": "https://api.github.com/users/{user}/repos{?type,page,per_page,sort}",
+            "user_search_url": "https://api.github.com/search/users?q={query}{&page,per_page,sort,order}"
+          }
+        })
+    http_version: 
+  recorded_at: Mon, 26 Feb 2018 22:58:27 GMT
+- request:
+    method: options
+    uri: http://www.example.com/
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Host:
+      - www.example.com
+      Proxy-Connection:
+      - keep-alive
+      Access-Control-Request-Method:
+      - GET
+      Origin:
+      - http://127.0.0.1:63840
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/64.0.3282.167 Safari/537.36
+      Access-Control-Request-Headers:
+      - turbolinks-referrer
+      Accept:
+      - "*/*"
+      Accept-Language:
+      - en-US,en;q=0.9
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Allow:
+      - OPTIONS, GET, HEAD, POST
+      Cache-Control:
+      - max-age=604800
+      Date:
+      - Mon, 26 Feb 2018 22:58:27 GMT
+      Expires:
+      - Mon, 05 Mar 2018 22:58:27 GMT
+      Server:
+      - EOS (vny006/0452)
+      Content-Length:
+      - '0'
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version: 
+  recorded_at: Mon, 26 Feb 2018 22:58:27 GMT
+recorded_with: VCR 4.0.0

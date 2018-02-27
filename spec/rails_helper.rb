@@ -29,6 +29,7 @@ RSpec.configure do |config|
     require 'capybara'
     require 'selenium/webdriver'
     require 'billy/capybara/rspec'
+    require 'support/puffing_billy_patch'
 
     # @see https://github.com/oesmith/puffing-billy/blob/v0.12.0/lib/billy/browsers/capybara.rb#L57-L65 `selenium_chrome_billy` registration
     ::Capybara.register_driver :custom_selenium_chrome_billy do |app|
@@ -77,6 +78,48 @@ RSpec.configure do |config|
     end
     config.after do |ex|
       WebMock.disable!
+    end
+  end
+
+  config.when_first_matching_example_defined(:vcr) do
+    require 'webmock'
+    require 'vcr'
+
+    ::WebMock.after_request(real_requests_only: false) do |request, response|
+      # Issue: https://github.com/vcr/vcr/issues/615
+      if response.headers && %w[ gzip deflate ].include?(response.headers['Content-Encoding'])
+        response.headers.delete('Content-Encoding')
+      end
+    end
+
+    VCR.configure do |c|
+      c.cassette_library_dir = 'spec/cassettes'
+      c.hook_into :webmock
+      c.ignore_localhost = true
+      c.default_cassette_options = {
+        record: :once,
+        update_content_length_header: true,
+        allow_unused_http_interactions: true,   # Tmp until JSONP works
+      }
+      c.configure_rspec_metadata!
+    end
+
+    # NOTE: In a real app I likely would not include this. It is necessary here
+    # to ensure the different tests which should not be using VCR do not
+    # have it enabled. Due to threading issues we need to do this early before
+    # puma launches; which is why we use `prepend_before`.
+    config.prepend_before do |ex|
+      if ex.metadata[:vcr]
+        VCR.turn_on!
+      else
+        VCR.turn_off!
+      end
+    end
+    config.after do |ex|
+      if ex.metadata[:vcr]
+        VCR.eject_cassette(skip_no_unused_interactions_assertion: !!ex.exception)
+        VCR.turn_off!
+      end
     end
   end
 

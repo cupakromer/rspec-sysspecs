@@ -339,6 +339,86 @@ RSpec.describe "System specs", type: :system do
     end
   end
 
-  context "using puffing-billy with vcr (hooked into webmock)"
+  context "using puffing-billy with vcr (hooked into webmock)", :webmock, :vcr, :aggregate_failures do
+    before do
+      driven_by :custom_selenium_chrome_billy
+
+      Billy.configure do |c|
+        # We don't want puffing-billy to block VCR
+        c.non_whitelisted_requests_disabled = false
+      end
+
+      stub_request(:any, /www.gstatic.com/).to_return(status: 200, body: "")
+      stub_request(:any, /favicon.ico/).to_return(status: 200, body: "")
+    end
+
+    it "handles requests made by the spec" do
+      # NOTE: Using `visit` here requires the port otherwise the system tests
+      # plugin will add it to direct it to the test Rails puma server
+      visit 'http://www.example.com:80/'
+      expect(page).to have_content("VCR recorded example.com request")
+
+      visit 'https://www.example.com:443'
+      expect(page).to have_content("VCR recorded SSL example.com request")
+    end
+
+    pending "handles client side JSONP requests made by the browser" do
+      visit books_url
+      expect(find("#github")).to have_content("Captured Github API")
+    end
+
+    it "handles browser redirects" do
+      visit books_url
+      click_link "New Redirect Book"
+      expect(page).to have_content("Captured example.com request")
+
+      visit books_url
+      click_link "New SSL Book"
+      expect(page).to have_content("Captured SSL example.com request")
+    end
+
+    it "handles server side network requests" do
+      visit books_url
+      click_button "All Books"
+      expect(find("#serverjs")).to have_content(
+        "Captured server side request"
+      )
+    end
+
+    it "sits behind the puffing-billy stubs" do
+      proxy.stub("http://www.example.com/").and_return(
+        text: "puffing-billy stub"
+      )
+      visit books_url
+      click_link "New Redirect Book"
+      expect(page).to have_content "puffing-billy stub"
+    end
+
+    it "sits behind the puffing-billy cache" do
+      # Configure VCR like caching
+      Billy.configure do |c|
+        # NOTE: To add new caches set `non_whitelisted_requests_disabled` to `false
+        c.non_whitelisted_requests_disabled = true
+        c.cache = true
+        c.cache_request_headers = false
+        c.dynamic_jsonp = true
+        c.dynamic_jsonp_keys = %w[ callback _ ]
+        c.persist_cache = true
+        c.ignore_cache_port = true # defaults to true
+        c.non_successful_cache_disabled = false
+        c.non_successful_error_level = :warn
+        c.cache_path = 'spec/req_cache/'
+        c.cache_request_body_methods = ['post', 'patch', 'put'] # defaults to ['post']
+      end
+
+      visit books_url
+      click_link "New Redirect Book"
+      expect(page).to have_content("Captured example.com request")
+
+      visit books_url
+      click_link "New SSL Book"
+      expect(page).to have_content("Captured SSL example.com request")
+    end
+  end
 
 end

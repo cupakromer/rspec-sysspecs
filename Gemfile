@@ -58,6 +58,7 @@ group :test do
   # System test stubbing
   gem 'puffing-billy', require: false
   gem 'webmock', require: false
+  gem 'vcr', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
