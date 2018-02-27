@@ -1,24 +1,17 @@
-# README
+# RSpec System Test Stubbing
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Example repo showing how to configure RSpec 3.7 with Rails 5.1 to work with
+stubbing system tests.
 
-Things you may want to cover:
+The goal is to get this working with chrome, webmock and VCR.
 
-* Ruby version
+## System
 
-* System dependencies
+  - Ruby 2.5
+  - Rails 5.1 (5.1.5+ required with [custom puma configs](https://github.com/rails/rails/pull/30712))
+  - Chrome 64+
+  - chromedriver 2.35+
+  - puffing-billy
+  - webmock
+  - VCR
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
