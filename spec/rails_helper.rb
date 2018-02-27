@@ -40,6 +40,7 @@ RSpec.configure do |config|
       options.add_argument '--disable-gpu'
 
       # Configure headless mode to ignore our local certs
+      options.add_argument '--no-sandbox'
       options.add_argument '--disable-web-security'
       options.add_argument '--allow-running-insecure-content'
       options.add_argument '--ignore-certificate-errors'
@@ -61,6 +62,7 @@ RSpec.configure do |config|
 
       capabilities = ::Selenium::WebDriver::Remote::Capabilities.chrome
       capabilities['acceptInsecureCerts'] = true
+      capabilities['acceptSslCerts'] = true
 
       ::Capybara::Selenium::Driver.new(
         app,
