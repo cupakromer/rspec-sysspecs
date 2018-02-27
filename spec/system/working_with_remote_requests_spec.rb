@@ -362,7 +362,7 @@ RSpec.describe "System specs", type: :system do
       expect(page).to have_content("VCR recorded SSL example.com request")
     end
 
-    pending "handles client side JSONP requests made by the browser" do
+    it "handles client side JSONP requests made by the browser" do
       visit books_url
       expect(find("#github")).to have_content("Captured Github API")
     end

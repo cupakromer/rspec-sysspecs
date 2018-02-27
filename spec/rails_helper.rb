@@ -82,27 +82,7 @@ RSpec.configure do |config|
   end
 
   config.when_first_matching_example_defined(:vcr) do
-    require 'webmock'
-    require 'vcr'
-
-    ::WebMock.after_request(real_requests_only: false) do |request, response|
-      # Issue: https://github.com/vcr/vcr/issues/615
-      if response.headers && %w[ gzip deflate ].include?(response.headers['Content-Encoding'])
-        response.headers.delete('Content-Encoding')
-      end
-    end
-
-    VCR.configure do |c|
-      c.cassette_library_dir = 'spec/cassettes'
-      c.hook_into :webmock
-      c.ignore_localhost = true
-      c.default_cassette_options = {
-        record: :once,
-        update_content_length_header: true,
-        allow_unused_http_interactions: true,   # Tmp until JSONP works
-      }
-      c.configure_rspec_metadata!
-    end
+    require 'support/vcr'
 
     # NOTE: In a real app I likely would not include this. It is necessary here
     # to ensure the different tests which should not be using VCR do not
