@@ -1,0 +1,8 @@
+#!/bin/bash
+
+PLATFORM=linux64
+VERSION=$(curl https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+echo "Installing chromedriver $VERSION"
+curl -O https://chromedriver.storage.googleapis.com/$VERSION/chromedriver_$PLATFORM.zip
+unzip -o chromedriver_$PLATFORM.zip -d ~/bin/
+chromedriver --version

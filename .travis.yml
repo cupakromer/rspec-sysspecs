@@ -1,0 +1,7 @@
+language: ruby
+cache: bundler
+dist: trusty
+addons:
+  chrome: stable
+before_install:
+  - bin/chromedriver-install
