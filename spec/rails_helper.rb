@@ -34,7 +34,17 @@ RSpec.configure do |config|
     # @see https://github.com/oesmith/puffing-billy/blob/v0.12.0/lib/billy/browsers/capybara.rb#L57-L65 `selenium_chrome_billy` registration
     ::Capybara.register_driver :custom_selenium_chrome_billy do |app|
       options = Selenium::WebDriver::Chrome::Options.new
-      options.add_argument("--proxy-server=#{Billy.proxy.host}:#{Billy.proxy.port}")
+
+      # Run in headless mode
+      options.add_argument '--headless'
+      options.add_argument '--disable-gpu'
+
+      # Configure headless mode to ignore our local certs
+      options.add_argument '--disable-web-security'
+      options.add_argument '--allow-running-insecure-content'
+      options.add_argument '--ignore-certificate-errors'
+      options.add_argument '--allow-insecure-localhost'
+
 
       # When using puffing-billy custom cache scopes to record variations of
       # the same URL it's possible to get random spec failures due to Chrome's
@@ -48,9 +58,12 @@ RSpec.configure do |config|
       # Setting the value to 0 does not work either.
       options.add_argument '--disk-cache-size=1'
 
+      options.add_argument "--proxy-server=#{Billy.proxy.host}:#{Billy.proxy.port}"
+
       ::Capybara::Selenium::Driver.new(
-        app, browser: :chrome,
-        options: options
+        app,
+        browser: :chrome,
+        options: options,
       )
     end
 
