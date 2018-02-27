@@ -45,7 +45,6 @@ RSpec.configure do |config|
       options.add_argument '--ignore-certificate-errors'
       options.add_argument '--allow-insecure-localhost'
 
-
       # When using puffing-billy custom cache scopes to record variations of
       # the same URL it's possible to get random spec failures due to Chrome's
       # internal cache; which may serve a previous cached version instead.
@@ -60,9 +59,13 @@ RSpec.configure do |config|
 
       options.add_argument "--proxy-server=#{Billy.proxy.host}:#{Billy.proxy.port}"
 
+      capabilities = ::Selenium::WebDriver::Remote::Capabilities.chrome
+      capabilities['acceptInsecureCerts'] = true
+
       ::Capybara::Selenium::Driver.new(
         app,
         browser: :chrome,
+        desired_capabilities: capabilities,
         options: options,
       )
     end
