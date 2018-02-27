@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "System specs", :skip do
+RSpec.describe "System specs", type: :system do
 
   before do
     Book.create! title: "Any Book Title"
@@ -55,7 +55,7 @@ RSpec.describe "System specs", :skip do
       end
     end
 
-    describe "stubbing client side JSONP requests made by the browser" do
+    describe "stubbing client side JSONP requests made by the browser", :skip do
       it "behaves like normal HTTP/HTTPS stubbing" do
         proxy.stub("https://api.github.com:443/")
              .and_return(jsonp: "I am not Github SSL!")
@@ -75,7 +75,7 @@ RSpec.describe "System specs", :skip do
       end
     end
 
-    describe "stubbing browser redirects" do
+    describe "stubbing browser redirects", :skip do
       it "behaves like normal HTTP/HTTPS stubbing", :aggregate_failures do
         proxy.stub("http://www.example.com/").and_return(text: "I am a stub!")
         visit books_url
@@ -115,7 +115,7 @@ RSpec.describe "System specs", :skip do
       )
     end
 
-    describe "recording / playing back requests", :aggregate_failures do
+    describe "recording / playing back requests", :skip, :aggregate_failures do
       before do |ex|
         # Configure VCR like caching
         Billy.configure do |c|
@@ -206,7 +206,7 @@ RSpec.describe "System specs", :skip do
     end
   end
 
-  context "using puffing-billy with webmock", :aggregate_failures, :webmock do
+  context "using puffing-billy with webmock", :skip, :aggregate_failures, :webmock do
     before do
       driven_by :custom_selenium_chrome_billy
 
@@ -339,7 +339,7 @@ RSpec.describe "System specs", :skip do
     end
   end
 
-  context "using puffing-billy with vcr (hooked into webmock)", :webmock, :vcr, :aggregate_failures do
+  context "using puffing-billy with vcr (hooked into webmock)", :skip, :webmock, :vcr, :aggregate_failures do
     before do
       driven_by :custom_selenium_chrome_billy
 

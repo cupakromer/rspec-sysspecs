@@ -3,7 +3,7 @@ cache: bundler
 sudo: required
 dist: trusty
 addons:
-  chrome: stable
+  chrome: beta
 before_install:
   - bin/chromedriver-install
 script: bin/rspec --fail-fast

@@ -72,8 +72,7 @@ RSpec.configure do |config|
 
     # Use `prepend_before` to allow specs to override this in `before` hooks
     config.prepend_before(type: :system) do
-      #driven_by :selenium_chrome_billy
-      driven_by :selenium_chrome_headless
+      driven_by :custom_selenium_chrome_billy
     end
   end
 
